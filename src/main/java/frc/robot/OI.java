@@ -22,10 +22,6 @@ public class OI {
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
 
-  final static int leftStickXAxis = 0;
-  final static int leftStickYAxis = 1;
-  final static int rightStickXAxis = 4;
-
   final static int xboxDriveControllerPort = 1;
   final static int xboxOperatorControllerPort = 2;
   
@@ -51,4 +47,8 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+  public XboxController getXboxDrive(){
+    return xboxDrive;
+  }
 }

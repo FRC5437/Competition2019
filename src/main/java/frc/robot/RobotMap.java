@@ -15,41 +15,45 @@ package frc.robot;
  */
 public class RobotMap {
   // Channels for the wheels
-  final static int frontLeftMecanumPort	= 2;
-  final static int rearLeftMecanumPort	= 3;
-  final static int frontRightMecanumPort	= 1;
-  final static int rearRightMecanumPort	= 0;
+  final public static int frontLeftMecanumPort	= 2;
+  final public static int rearLeftMecanumPort	= 3;
+  final public static int frontRightMecanumPort	= 1;
+  final public static int rearRightMecanumPort	= 0;
 
-  final static int cargoVacuumPort = 7;
-  final static int hatchVacuumPort1 = 9;
-  final static int hatchVacuumPort2 = 10;
+  final public static int cargoVacuumPort = 7;
+  final public static int hatchVacuumPort1 = 9;
+  final public static int hatchVacuumPort2 = 10;
 
-  final static int elevatorPort = 11;
-  final static int stiltDrivePort = 12;
+  final public static int elevatorPort = 11;
+  final public static int stiltDrivePort = 12;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  final static int pneumaticsControlModulePrimaryNodeId = 0;
-  final static int pneumaticsControlModuleSecondaryNodeId = 1;
+  final public static int pneumaticsControlModulePrimaryNodeId = 0;
+  final public static int pneumaticsControlModuleSecondaryNodeId = 1;
 
-  final static int solenoidShoulderIn = 20;
-  final static int solenoidShoulderOut = 21;
-  final static int solenoidFirstElbowIn = 22;
-  final static int solenoidFirstElbowOut = 23;
-  final static int solenoidSecondElbowIn = 24;
-  final static int solenoidSecondElbowOut = 25;
-  final static int solenoidForwardStiltsUp = 26;
-  final static int solenoidForwardStiltsDown = 27;
-  final static int solenoidRearStiltsUp = 28;
-  final static int solenoidRearStiltsDown = 29;
-  final static int solenoidLeftVacuumOpen = 30;
-  final static int solenoidLeftVacuumClosed = 31;
-  final static int solenoidRightVacuumOpen = 32;
-  final static int solenoidRightVacuumClosed = 33;
+  final public static int solenoidShoulderIn = 20;
+  final public static int solenoidShoulderOut = 21;
+  final public static int solenoidFirstElbowIn = 22;
+  final public static int solenoidFirstElbowOut = 23;
+  final public static int solenoidSecondElbowIn = 24;
+  final public static int solenoidSecondElbowOut = 25;
+  final public static int solenoidForwardStiltsUp = 26;
+  final public static int solenoidForwardStiltsDown = 27;
+  final public static int solenoidRearStiltsUp = 28;
+  final public static int solenoidRearStiltsDown = 29;
+  final public static int solenoidLeftVacuumOpen = 30;
+  final public static int solenoidLeftVacuumClosed = 31;
+  final public static int solenoidRightVacuumOpen = 32;
+  final public static int solenoidRightVacuumClosed = 33;
 
   //TODO - setup any constants for gyro, ultrasonics, limit switches, and the elevator encoder
+
+  final public static int leftStickXAxis = 0;
+  final public static int leftStickYAxis = 1;
+  final public static int rightStickXAxis = 4;
 
 }
