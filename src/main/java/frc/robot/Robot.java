@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,17 +29,15 @@ public class Robot extends TimedRobot {
   public static Chassis m_chassis = new Chassis();
   public static OI m_oi;
 
-  //setup pneumatics - compressor and some double solenoids on the primary PCM
+  //setup pneumatics
   Compressor compressor = new Compressor(RobotMap.pneumaticsControlModulePrimaryNodeId);
-  DoubleSolenoid shoulder = new DoubleSolenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidShoulderIn, RobotMap.solenoidShoulderOut);
-  DoubleSolenoid firstElbow = new DoubleSolenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidFirstElbowIn, RobotMap.solenoidFirstElbowOut);
-  DoubleSolenoid secondElbow = new DoubleSolenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidSecondElbowIn, RobotMap.solenoidSecondElbowOut);
-
-  //use second PCM ports for the rest of the solenoids
-  DoubleSolenoid forwardPairStilts = new DoubleSolenoid(RobotMap.pneumaticsControlModuleSecondaryNodeId, RobotMap.solenoidForwardStiltsUp, RobotMap.solenoidForwardStiltsDown);
-  DoubleSolenoid rearPairStilts = new DoubleSolenoid(RobotMap.pneumaticsControlModuleSecondaryNodeId, RobotMap.solenoidRearStiltsUp, RobotMap.solenoidRearStiltsDown);
-  DoubleSolenoid leftVacuumTank = new DoubleSolenoid(RobotMap.pneumaticsControlModuleSecondaryNodeId, RobotMap.solenoidLeftVacuumClosed, RobotMap.solenoidLeftVacuumOpen);
-  DoubleSolenoid rightVacuumTank = new DoubleSolenoid(RobotMap.pneumaticsControlModuleSecondaryNodeId, RobotMap.solenoidRightVacuumClosed, RobotMap.solenoidRightVacuumOpen);
+  Solenoid shoulder = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidShoulder);
+  Solenoid firstElbow = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidElbow);
+  Solenoid forwardPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
+  Solenoid rearPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
+  Solenoid leftVacuumTank = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidLeftVacuum);
+  Solenoid rightVacuumTank = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRightVacuum);
+  Solenoid cargoVacuumRelease = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidCargoVacuum);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -53,7 +51,7 @@ public class Robot extends TimedRobot {
     compressor.setClosedLoopControl(true);
 
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    m_chooser.setDefaultOption("Default Auto", new HabClimbFromL1ToL3());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }

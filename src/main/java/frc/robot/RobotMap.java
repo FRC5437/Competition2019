@@ -35,20 +35,13 @@ public class RobotMap {
   final public static int pneumaticsControlModulePrimaryNodeId = 0;
   final public static int pneumaticsControlModuleSecondaryNodeId = 1;
 
-  final public static int solenoidShoulderIn = 20;
-  final public static int solenoidShoulderOut = 21;
-  final public static int solenoidFirstElbowIn = 22;
-  final public static int solenoidFirstElbowOut = 23;
-  final public static int solenoidSecondElbowIn = 24;
-  final public static int solenoidSecondElbowOut = 25;
-  final public static int solenoidForwardStiltsUp = 26;
-  final public static int solenoidForwardStiltsDown = 27;
-  final public static int solenoidRearStiltsUp = 28;
-  final public static int solenoidRearStiltsDown = 29;
-  final public static int solenoidLeftVacuumOpen = 30;
-  final public static int solenoidLeftVacuumClosed = 31;
-  final public static int solenoidRightVacuumOpen = 32;
-  final public static int solenoidRightVacuumClosed = 33;
+  final public static int solenoidShoulder = 0;
+  final public static int solenoidElbow = 1;
+  final public static int solenoidForwardStilts = 2;
+  final public static int solenoidRearStilts = 3;
+  final public static int solenoidLeftVacuum = 4;
+  final public static int solenoidRightVacuum = 5;
+  final public static int solenoidCargoVacuum = 6;
 
   //TODO - setup any constants for gyro, ultrasonics, limit switches, and the elevator encoder
 
