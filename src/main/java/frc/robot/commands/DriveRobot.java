@@ -27,8 +27,8 @@ public class DriveRobot extends Command {
   @Override
   protected void execute() {
       XboxController xboxDrive = Robot.m_oi.getXboxDrive();
-      Robot.m_chassis.driveCartesian(getEnhancedJoystickInput(xboxDrive.getRawAxis(RobotMap.leftStickXAxis)), 
-                                   -1.0 * getEnhancedJoystickInput(xboxDrive.getRawAxis(RobotMap.leftStickYAxis)), 
+      Robot.m_chassis.driveCartesian(-1.0*getEnhancedJoystickInput(xboxDrive.getRawAxis(RobotMap.leftStickYAxis)), 
+                                   getEnhancedJoystickInput(xboxDrive.getRawAxis(RobotMap.leftStickXAxis)), 
                                     getEnhancedJoystickInput(xboxDrive.getRawAxis(RobotMap.rightStickXAxis)));
   }
 

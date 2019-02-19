@@ -18,7 +18,7 @@ public class RobotMap {
   final public static int frontLeftMecanumPort	= 2;
   final public static int rearLeftMecanumPort	= 3;
   final public static int frontRightMecanumPort	= 1;
-  final public static int rearRightMecanumPort	= 0;
+  final public static int rearRightMecanumPort	= 4;
 
   final public static int cargoVacuumPort = 7;
   final public static int hatchVacuumPort1 = 9;
