@@ -7,14 +7,30 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
+
 
 /**
  * Add your docs here.
  */
 public class CargoVacuum extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  WPI_TalonSRX cargoVacuumMotor;
+
+  public CargoVacuum(){
+    cargoVacuumMotor = new WPI_TalonSRX(RobotMap.cargoVacuumPort);
+  }
+
+  public void activateVacuum(){
+    cargoVacuumMotor.set(ControlMode.PercentOutput, 1.0);
+  }
+
+  public void deactivateVacuum(){
+    cargoVacuumMotor.set(ControlMode.PercentOutput, 0.0);
+  }
 
   @Override
   public void initDefaultCommand() {

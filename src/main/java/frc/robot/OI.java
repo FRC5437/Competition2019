@@ -8,6 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.LowerElevator;
+import frc.robot.commands.RaiseElevator;
+import frc.robot.commands.SuckCargo;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,6 +32,22 @@ public class OI {
   
   XboxController xboxDrive = new XboxController(xboxDriveControllerPort);
   XboxController xboxOperator = new XboxController(xboxOperatorControllerPort);
+
+  public JoystickButton xButton = new JoystickButton(xboxDrive, 3);
+	public JoystickButton yButton = new JoystickButton(xboxDrive, 4);
+	public JoystickButton aButton = new JoystickButton(xboxDrive, 1);
+	public JoystickButton bButton = new JoystickButton(xboxDrive, 2);
+	public JoystickButton rightBumper = new JoystickButton(xboxDrive, 6);
+	public JoystickButton leftBumper = new JoystickButton(xboxDrive, 5);
+	public JoystickButton startButton = new JoystickButton(xboxDrive, 8);
+	public JoystickButton selectButton = new JoystickButton(xboxDrive, 7);
+	public JoystickButton leftStickButton = new JoystickButton(xboxDrive, 9);
+	public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
+
+  public OI(){
+    yButton.whileHeld(new RaiseElevator());
+    xButton.whileHeld(new SuckCargo());
+  }
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

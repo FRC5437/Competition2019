@@ -20,11 +20,11 @@ public class RobotMap {
   final public static int frontRightMecanumPort	= 1;
   final public static int rearRightMecanumPort	= 4;
 
-  final public static int cargoVacuumPort = 7;
-  final public static int hatchVacuumPort1 = 9;
-  final public static int hatchVacuumPort2 = 10;
+  final public static int cargoVacuumPort = 33;
+  final public static int hatchVacuumPort1 = 31;
+  final public static int hatchVacuumPort2 = 44;
 
-  final public static int elevatorPort = 11;
+  final public static int elevatorPort = 55;
   final public static int stiltDrivePort = 12;
 
   // If you are using multiple modules, make sure to define both the port

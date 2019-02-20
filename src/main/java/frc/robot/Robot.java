@@ -27,6 +27,8 @@ import frc.robot.commands.*;
  */
 public class Robot extends TimedRobot {
   public static Chassis m_chassis = new Chassis();
+  public static Elevator m_elevator = new Elevator();
+  public static CargoVacuum m_cargoVacuum = new CargoVacuum();
   public static OI m_oi;
 
   //setup pneumatics

@@ -7,18 +7,32 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  WPI_TalonSRX elevatorMotor;
+
+  public Elevator(){
+    elevatorMotor = new WPI_TalonSRX(RobotMap.elevatorPort);
+    elevatorMotor.configOpenloopRamp(0.5);
+    elevatorMotor.setNeutralMode(NeutralMode.Brake);
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void setElevatorSpeed(double drivePercent){
+      elevatorMotor.set(ControlMode.PercentOutput, drivePercent);
   }
 }

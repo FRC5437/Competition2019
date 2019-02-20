@@ -7,14 +7,22 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class HatchVacuum extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  WPI_TalonSRX leftHatchVacuumMotor;
+  WPI_TalonSRX rightHatchVacuumMotor;
+
+  public HatchVacuum(){
+    leftHatchVacuumMotor = new WPI_TalonSRX(RobotMap.hatchVacuumPort1);
+    rightHatchVacuumMotor = new WPI_TalonSRX(RobotMap.hatchVacuumPort2);
+  }
 
   @Override
   public void initDefaultCommand() {
