@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,6 +23,16 @@ public class HatchVacuum extends Subsystem {
   public HatchVacuum(){
     leftHatchVacuumMotor = new WPI_TalonSRX(RobotMap.hatchVacuumPort1);
     rightHatchVacuumMotor = new WPI_TalonSRX(RobotMap.hatchVacuumPort2);
+  }
+
+  public void activateVacuum(){
+      leftHatchVacuumMotor.set(ControlMode.PercentOutput, 1.0);
+      rightHatchVacuumMotor.set(ControlMode.PercentOutput, 1.0);
+  }
+
+  public void deactivateVacuum(){
+      leftHatchVacuumMotor.set(ControlMode.PercentOutput, 0.0);
+      rightHatchVacuumMotor.set(ControlMode.PercentOutput, 0.0);
   }
 
   @Override

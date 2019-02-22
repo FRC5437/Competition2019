@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   public static Chassis m_chassis = new Chassis();
   public static Elevator m_elevator = new Elevator();
   public static CargoVacuum m_cargoVacuum = new CargoVacuum();
+  public static HatchVacuum m_hatchVacuum = new HatchVacuum();
   public static OI m_oi;
 
   //setup pneumatics
@@ -51,6 +52,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     compressor.setClosedLoopControl(true);
+    leftVacuumTank.set(false);
+    rightVacuumTank.set(false);
 
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new HabClimbFromL1ToL3());
