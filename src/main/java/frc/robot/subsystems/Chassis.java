@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -32,6 +33,7 @@ public class Chassis extends Subsystem {
   WPI_TalonSRX rearLeft;
   WPI_TalonSRX frontRight;
   WPI_TalonSRX rearRight;
+  WPI_TalonSRX stiltDrive;
   Solenoid forwardStilts;
   Solenoid rearStilts;
   Ultrasonic frontUltrasonic;
@@ -46,6 +48,7 @@ public class Chassis extends Subsystem {
 
     forwardStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
     rearStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
+    stiltDrive = new WPI_TalonSRX(RobotMap.stiltDrivePort);
 
     frontLeft = new WPI_TalonSRX(RobotMap.frontLeftMecanumPort);
     rearLeft = new WPI_TalonSRX(RobotMap.rearLeftMecanumPort);
@@ -73,9 +76,28 @@ public class Chassis extends Subsystem {
     setDefaultCommand(new DriveRobot());
   }
 
-  //TODO determine if we are going to need gyroAngle in any scenario
+  // TODO determine if we are going to need gyroAngle in any scenario
   // it appears the x and y are documented backwards in wpi lib?
   public void driveCartesian(double x, double y, double rotation){
       myRobot.driveCartesian(x, y, rotation, 0.0);
+  }
+
+  public void driveOntoHab3(){
+    // elevate stilts and check ultrasonics for expected range (more than a foot)
+    forwardStilts.set(true);
+    rearStilts.set(true);
+    while ((frontUltrasonic.getRangeInches() > 12.0) && (rearUltrasonic.getRangeInches() > 12.0)){
+      // creep forward
+      stiltDrive.set(ControlMode.PercentOutput, 0.5);
+    }
+    // when front down facing ultrasonic shows platform stop creeping and raise front stilts
+    stiltDrive.set(ControlMode.PercentOutput, 0.0);
+    if (frontUltrasonic.getRangeInches() < 3.0){
+      forwardStilts.set(false);
+    }
+    // drive forward slowly
+    
+    // when rear down facing ultrasonic shows platform stop driving and raise rear stilts
+    // drive forward a little more and activate light show ;)
   }
 }
