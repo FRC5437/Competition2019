@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
@@ -30,8 +32,21 @@ public class Chassis extends Subsystem {
   WPI_TalonSRX rearLeft;
   WPI_TalonSRX frontRight;
   WPI_TalonSRX rearRight;
+  Solenoid forwardStilts;
+  Solenoid rearStilts;
+  Ultrasonic frontUltrasonic;
+  Ultrasonic rearUltrasonic;
 
+  // Subsystems are created as soon as the robot program starts - move any initialization that needs to wait
+  // for robot init or the activation of a game mode into new public methods to be invoked from the robot object
+  // at that time.
   public Chassis(){
+    frontUltrasonic = new Ultrasonic(RobotMap.frontUltrasonicDigitalOut, RobotMap.frontUltrasonicDigitalIn);
+    rearUltrasonic = new Ultrasonic(RobotMap.rearUltrasonicDigitalOut, RobotMap.rearUltrasonicDigitalIn);
+
+    forwardStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
+    rearStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
+
     frontLeft = new WPI_TalonSRX(RobotMap.frontLeftMecanumPort);
     rearLeft = new WPI_TalonSRX(RobotMap.rearLeftMecanumPort);
     frontRight = new WPI_TalonSRX(RobotMap.frontRightMecanumPort);

@@ -39,11 +39,21 @@ public class RobotMap {
   final public static int solenoidElbow = 1;
   final public static int solenoidForwardStilts = 2;
   final public static int solenoidRearStilts = 3;
-  final public static int solenoidLeftVacuum = 4;
-  final public static int solenoidRightVacuum = 5;
-  final public static int solenoidCargoVacuum = 6;
+
+  //for second PCM
+  final public static int solenoidLeftVacuumFill = 0;
+  final public static int solenoidRightVacuumFill = 1;
+  final public static int solenoidLeftVacuumRelease = 2;
+  final public static int solenoidRightVacuumRelease = 3;
+  final public static int solenoidCargoVacuum = 4;
+
 
   //TODO - setup any constants for gyro, ultrasonics, limit switches, and the elevator encoder
+  final public static int frontUltrasonicDigitalOut = 1;
+  final public static int frontUltrasonicDigitalIn = 1;
+  final public static int rearUltrasonicDigitalOut = 2;
+  final public static int rearUltrasonicDigitalIn = 2;
+  
 
   final public static int leftStickXAxis = 0;
   final public static int leftStickYAxis = 1;
