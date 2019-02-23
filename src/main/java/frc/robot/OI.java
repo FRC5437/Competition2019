@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.LowerElevator;
 import frc.robot.commands.RaiseElevator;
-import frc.robot.commands.SuckCargo;
-import frc.robot.commands.SuckHatch;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,8 +44,8 @@ public class OI {
 	public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
 
   public OI(){
-    yButton.whileHeld(new SuckHatch());
-    xButton.whileHeld(new SuckCargo());
+    //yButton.whileHeld(new SuckHatch();
+    //xButton.whileHeld(new SuckCargo());
   }
 
   // There are a few additional built in buttons you can use. Additionally,

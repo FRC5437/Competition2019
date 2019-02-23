@@ -20,10 +20,6 @@ public class RobotMap {
   final public static int frontRightMecanumPort	= 1;
   final public static int rearRightMecanumPort	= 4;
 
-  final public static int cargoVacuumPort = 33;
-  final public static int hatchVacuumPort1 = 31;
-  final public static int hatchVacuumPort2 = 44;
-
   final public static int elevatorPort = 55;
   final public static int stiltDrivePort = 12;
 
@@ -33,27 +29,16 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   final public static int pneumaticsControlModulePrimaryNodeId = 0;
-  final public static int pneumaticsControlModuleSecondaryNodeId = 1;
 
   final public static int solenoidShoulder = 0;
   final public static int solenoidElbow = 1;
   final public static int solenoidForwardStilts = 2;
   final public static int solenoidRearStilts = 3;
-
-  //for second PCM
-  final public static int solenoidLeftVacuumFill = 0;
-  final public static int solenoidRightVacuumFill = 1;
-  final public static int solenoidLeftVacuumRelease = 2;
-  final public static int solenoidRightVacuumRelease = 3;
-  final public static int solenoidCargoVacuum = 4;
-
+  final public static int solenoidClaw = 4;
 
   //TODO - setup any constants for gyro, ultrasonics, limit switches, and the elevator encoder
-  final public static int frontUltrasonicDigitalOut = 1;
-  final public static int frontUltrasonicDigitalIn = 1;
-  final public static int rearUltrasonicDigitalOut = 2;
-  final public static int rearUltrasonicDigitalIn = 2;
-  
+  final public static int frontProximitySensor = 1;
+  final public static int rearProximitySensor = 2;
 
   final public static int leftStickXAxis = 0;
   final public static int leftStickYAxis = 1;

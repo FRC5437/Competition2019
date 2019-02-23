@@ -28,8 +28,7 @@ import frc.robot.commands.*;
 public class Robot extends TimedRobot {
   public static Chassis m_chassis = new Chassis();
   public static Elevator m_elevator = new Elevator();
-  public static CargoVacuum m_cargoVacuum = new CargoVacuum();
-  public static HatchVacuum m_hatchVacuum = new HatchVacuum();
+  public static Claw m_claw = new Claw();
   public static OI m_oi;
 
   //setup pneumatics
@@ -38,9 +37,6 @@ public class Robot extends TimedRobot {
   Solenoid firstElbow = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidElbow);
   Solenoid forwardPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
   Solenoid rearPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
-  Solenoid leftVacuumTank = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidLeftVacuum);
-  Solenoid rightVacuumTank = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRightVacuum);
-  Solenoid cargoVacuumRelease = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidCargoVacuum);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -52,8 +48,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     compressor.setClosedLoopControl(true);
-    leftVacuumTank.set(false);
-    rightVacuumTank.set(false);
 
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new HabClimbFromL1ToL3());

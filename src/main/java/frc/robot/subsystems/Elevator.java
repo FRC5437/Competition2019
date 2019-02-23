@@ -20,6 +20,7 @@ import frc.robot.RobotMap;
 public class Elevator extends Subsystem {
   WPI_TalonSRX elevatorMotor;
 
+
   public Elevator(){
     elevatorMotor = new WPI_TalonSRX(RobotMap.elevatorPort);
     elevatorMotor.configOpenloopRamp(0.5);
@@ -35,4 +36,7 @@ public class Elevator extends Subsystem {
   public void setElevatorSpeed(double drivePercent){
       elevatorMotor.set(ControlMode.PercentOutput, drivePercent);
   }
+
+  //TODO - add specific height targets for elevator positioning
+  // such as rocket hatch low/mid/high and rocket cargo low/med/high
 }
