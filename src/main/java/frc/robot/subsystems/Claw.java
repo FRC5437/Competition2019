@@ -7,7 +7,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -15,6 +17,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  Solenoid clawSolenoid;
+
+  public Claw(){
+    clawSolenoid = new Solenoid(RobotMap.solenoidClaw);
+  }
+
 
   @Override
   public void initDefaultCommand() {

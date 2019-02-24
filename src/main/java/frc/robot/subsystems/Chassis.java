@@ -12,12 +12,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveRobot;
 
@@ -36,15 +35,15 @@ public class Chassis extends Subsystem {
   WPI_TalonSRX stiltDrive;
   Solenoid forwardStilts;
   Solenoid rearStilts;
-  Ultrasonic frontUltrasonic;
-  Ultrasonic rearUltrasonic;
+  DigitalInput frontProximitySensor;
+  DigitalInput rearProximitySensor;
 
   // Subsystems are created as soon as the robot program starts - move any initialization that needs to wait
   // for robot init or the activation of a game mode into new public methods to be invoked from the robot object
   // at that time.
   public Chassis(){
-    frontUltrasonic = new Ultrasonic(RobotMap.frontUltrasonicDigitalOut, RobotMap.frontUltrasonicDigitalIn);
-    rearUltrasonic = new Ultrasonic(RobotMap.rearUltrasonicDigitalOut, RobotMap.rearUltrasonicDigitalIn);
+    frontProximitySensor = new DigitalInput(RobotMap.frontProximitySensor);
+    rearProximitySensor = new DigitalInput(RobotMap.rearProximitySensor);
 
     forwardStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
     rearStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
@@ -86,13 +85,13 @@ public class Chassis extends Subsystem {
     // elevate stilts and check ultrasonics for expected range (more than a foot)
     forwardStilts.set(true);
     rearStilts.set(true);
-    while ((frontUltrasonic.getRangeInches() > 12.0) && (rearUltrasonic.getRangeInches() > 12.0)){
+    while (!frontProximitySensor.get() && !rearProximitySensor.get()){
       // creep forward
       stiltDrive.set(ControlMode.PercentOutput, 0.5);
     }
     // when front down facing ultrasonic shows platform stop creeping and raise front stilts
     stiltDrive.set(ControlMode.PercentOutput, 0.0);
-    if (frontUltrasonic.getRangeInches() < 3.0){
+    if (frontProximitySensor.get()){
       forwardStilts.set(false);
     }
     // drive forward slowly
