@@ -14,6 +14,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
@@ -27,7 +28,7 @@ public class Chassis extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   AHRS ahrs;
-  MecanumDrive myRobot;
+  MecanumDrive mecanumDrive;
   WPI_TalonSRX frontLeft;
   WPI_TalonSRX rearLeft;
   WPI_TalonSRX frontRight;
@@ -53,7 +54,7 @@ public class Chassis extends Subsystem {
     rearLeft = new WPI_TalonSRX(RobotMap.rearLeftMecanumPort);
     frontRight = new WPI_TalonSRX(RobotMap.frontRightMecanumPort);
     rearRight = new WPI_TalonSRX(RobotMap.rearRightMecanumPort);
-    myRobot = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+    mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
 
     //smooth acceleration for open loop control
     frontLeft.configOpenloopRamp(0.5);
@@ -66,7 +67,7 @@ public class Chassis extends Subsystem {
     rearLeft.setNeutralMode(NeutralMode.Brake);
     rearRight.setNeutralMode(NeutralMode.Brake);
 
-    myRobot.setExpiration(0.1);
+    mecanumDrive.setExpiration(0.1);
   }
 
   @Override
@@ -78,25 +79,45 @@ public class Chassis extends Subsystem {
   // TODO determine if we are going to need gyroAngle in any scenario
   // it appears the x and y are documented backwards in wpi lib?
   public void driveCartesian(double x, double y, double rotation){
-      myRobot.driveCartesian(x, y, rotation, 0.0);
+    mecanumDrive.driveCartesian(x, y, rotation, 0.0);
   }
 
   public void driveOntoHab3(){
     // elevate stilts and check ultrasonics for expected range (more than a foot)
     forwardStilts.set(true);
     rearStilts.set(true);
-    while (!frontProximitySensor.get() && !rearProximitySensor.get()){
+    if (!frontProximitySensor.get() && !rearProximitySensor.get()){
       // creep forward
       stiltDrive.set(ControlMode.PercentOutput, 0.5);
     }
+
+    // wait for the front proximity sensor to fire
+    while(!frontProximitySensor.get()){
+      // keep driving
+    }
     // when front down facing ultrasonic shows platform stop creeping and raise front stilts
     stiltDrive.set(ControlMode.PercentOutput, 0.0);
-    if (frontProximitySensor.get()){
-      forwardStilts.set(false);
+    forwardStilts.set(false);
+    
+    //verify the state of the world is like we expect - front is on and rear is off
+    if (frontProximitySensor.get() && !rearProximitySensor.get()){
+      // creep forward
+      stiltDrive.set(ControlMode.PercentOutput, 0.5);
     }
-    // drive forward slowly
+
+    // drive forward slowly until rear proximity sensor fires
+    while(!rearProximitySensor.get()){
+      // keep driving
+    }
     
     // when rear down facing ultrasonic shows platform stop driving and raise rear stilts
+    stiltDrive.set(ControlMode.PercentOutput, 0.0);
+    rearStilts.set(false);
+
     // drive forward a little more and activate light show ;)
+    mecanumDrive.drivePolar(0.4, 0.0, 0.0);
+    Timer.delay(0.5);
+    mecanumDrive.drivePolar(0.0, 0.0, 0.0);
+
   }
 }
