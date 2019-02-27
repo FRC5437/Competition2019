@@ -30,11 +30,11 @@ public class RobotMap {
 
   final public static int pneumaticsControlModulePrimaryNodeId = 0;
 
-  final public static int solenoidShoulder = 0;
-  final public static int solenoidElbow = 1;
-  final public static int solenoidForwardStilts = 2;
-  final public static int solenoidRearStilts = 3;
-  final public static int solenoidClaw = 4;
+  final public static int solenoidShoulder = 1;
+  final public static int solenoidElbow = 2;
+  final public static int solenoidClaw = 3;
+  final public static int solenoidForwardStilts = 4;
+  final public static int solenoidRearStilts = 5;
 
   //TODO - setup any constants for gyro, ultrasonics, limit switches, and the elevator encoder
   final public static int frontProximitySensor = 1;

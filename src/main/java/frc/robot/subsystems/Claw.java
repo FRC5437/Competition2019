@@ -23,7 +23,6 @@ public class Claw extends Subsystem {
     clawSolenoid = new Solenoid(RobotMap.solenoidClaw);
   }
 
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
