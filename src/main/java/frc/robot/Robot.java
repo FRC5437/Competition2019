@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -33,11 +26,7 @@ public class Robot extends TimedRobot {
 
   //setup pneumatics
   Compressor compressor = new Compressor(RobotMap.pneumaticsControlModulePrimaryNodeId);
-  Solenoid shoulder = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidShoulder);
-  Solenoid firstElbow = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidElbow);
-  Solenoid forwardPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
-  Solenoid rearPairStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
-
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 

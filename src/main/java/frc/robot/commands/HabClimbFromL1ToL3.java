@@ -8,16 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class HabClimbFromL1ToL3 extends Command {
   public HabClimbFromL1ToL3() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.m_chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_chassis.driveOntoHab3();
   }
 
   // Called repeatedly when this Command is scheduled to run

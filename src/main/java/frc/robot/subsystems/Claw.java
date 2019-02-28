@@ -18,9 +18,55 @@ public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   Solenoid clawSolenoid;
+  Solenoid shoulderSolenoid;
+  Solenoid elbowSolenoid;
 
   public Claw(){
     clawSolenoid = new Solenoid(RobotMap.solenoidClaw);
+    shoulderSolenoid = new Solenoid(RobotMap.solenoidShoulder);
+    elbowSolenoid = new Solenoid(RobotMap.solenoidElbow);
+  }
+
+  public void initialize(){
+    clawSolenoid.set(true);
+    shoulderSolenoid.set(true);
+    elbowSolenoid.set(true);
+  }
+
+  public void closeClaw(){
+    clawSolenoid.set(false);
+  }
+
+  public void openClaw(){
+    clawSolenoid.set(true);
+  }
+
+  public void extendElbow(){
+    elbowSolenoid.set(true);
+  }
+
+  public void retractElbow(){
+    elbowSolenoid.set(false);
+  }
+
+  public void extendShoulder(){
+    shoulderSolenoid.set(true);
+  }
+
+  public void retractShoulder(){
+    shoulderSolenoid.set(false);
+  }
+
+  public boolean getClawState(){
+    return clawSolenoid.get();
+  }
+
+  public boolean getElbowState(){
+    return elbowSolenoid.get();
+  }
+
+  public boolean getShoulderState(){
+    return shoulderSolenoid.get();
   }
 
   @Override

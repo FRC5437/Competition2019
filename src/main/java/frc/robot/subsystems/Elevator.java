@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -49,7 +42,7 @@ public class Elevator extends PIDSubsystem {
   
   @Override
   protected void usePIDOutput(double output) {
-    elevatorMotor.set(output);
+    elevatorMotor.set(ControlMode.PercentOutput, output);
   }
 
   @Override
@@ -75,7 +68,7 @@ public class Elevator extends PIDSubsystem {
   public void stopElevator(){
     elevatorMotor.set(ControlMode.PercentOutput, 0.0);
   }
-  
+
   //TODO - add specific height targets for elevator positioning
   // such as rocket hatch low/mid/high and rocket cargo low/med/high
 
