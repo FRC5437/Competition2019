@@ -9,12 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class TuckArm extends CommandGroup {
+public class DropArm extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public TuckArm() {
-    addParallel(new RetractElbow());
-    addParallel(new ExtendShoulder());
+  public DropArm() {
+    addSequential(new RetractShoulder());
+    addSequential(new RetractElbow());
   }
 }

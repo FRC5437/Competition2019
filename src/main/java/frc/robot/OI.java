@@ -10,11 +10,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CloseClaw;
+import frc.robot.commands.DropArm;
 import frc.robot.commands.ExtendElbow;
 import frc.robot.commands.ExtendShoulder;
 import frc.robot.commands.OpenClaw;
+import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractElbow;
 import frc.robot.commands.RetractShoulder;
+import frc.robot.commands.StraightenArm;
+import frc.robot.commands.ToggleClaw;
+import frc.robot.commands.TuckArm;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,11 +52,11 @@ public class OI {
 	public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
 
   public OI(){
-    xButton.whenPressed(new CloseClaw());
-    yButton.whenPressed(new OpenClaw());
-    aButton.whenPressed(new ExtendElbow());
-    bButton.whenPressed(new RetractElbow());
-    rightBumper.whenPressed(new ExtendShoulder());
+    xButton.whenPressed(new ToggleClaw());
+    yButton.whenPressed(new TuckArm());
+    aButton.whenPressed(new StraightenArm());
+    bButton.whenPressed(new RaiseArm());
+    rightBumper.whenPressed(new DropArm());
     leftBumper.whenPressed(new RetractShoulder());
   }
 
