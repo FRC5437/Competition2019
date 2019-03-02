@@ -7,7 +7,7 @@ public class StraightenArm extends CommandGroup {
    * Add your docs here.
    */
   public StraightenArm() {
-    addParallel(new RetractShoulder());
-    addParallel(new ExtendElbow());
+    addSequential(new RetractShoulder());
+    addSequential(new ExtendElbow());
   }
 }

@@ -53,11 +53,11 @@ public class OI {
 
   public OI(){
     xButton.whenPressed(new ToggleClaw());
-    yButton.whenPressed(new TuckArm());
-    aButton.whenPressed(new StraightenArm());
-    bButton.whenPressed(new RaiseArm());
-    rightBumper.whenPressed(new DropArm());
-    leftBumper.whenPressed(new RetractShoulder());
+    yButton.whenPressed(new ExtendShoulder());
+    aButton.whenPressed(new ExtendElbow());
+    bButton.whenPressed(new TuckArm());
+    rightBumper.whenPressed(new RetractShoulder());
+    leftBumper.whenPressed(new RetractElbow());
   }
 
   // There are a few additional built in buttons you can use. Additionally,

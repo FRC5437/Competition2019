@@ -15,7 +15,7 @@ import frc.robot.commands.AdjustElevator;
  * Add your docs here.
  */
 public class Elevator extends PIDSubsystem {
-  Solenoid solenoidBrake;
+  //Solenoid solenoidBrake;
   WPI_TalonSRX elevatorMotor;
   WPI_TalonSRX elevatorSlaveMotor;
   final static double kP = 0.4;
@@ -42,8 +42,8 @@ public class Elevator extends PIDSubsystem {
     elevatorSlaveMotor.follow(elevatorMotor);
     //TODO any other config needed???
 
-    solenoidBrake = new Solenoid(RobotMap.solenoidBrake);
-    solenoidBrake.set(false);
+    //solenoidBrake = new Solenoid(RobotMap.solenoidBrake);
+    //solenoidBrake.set(false);
   }
 
   @Override
@@ -64,16 +64,16 @@ public class Elevator extends PIDSubsystem {
   }
 
   public void setBrake(){
-    solenoidBrake.set(true);
+    //solenoidBrake.set(true);
   }
 
   public void releaseBrake(){
-    solenoidBrake.set(false);
+    //solenoidBrake.set(false);
   }
 
   public void adjustElevator(double speed){
     //TODO - adjust speed for up vs down differences
-    solenoidBrake.set(false);
+    //solenoidBrake.set(false);
     elevatorMotor.set(ControlMode.PercentOutput, speed);
   }
 
@@ -86,7 +86,7 @@ public class Elevator extends PIDSubsystem {
     boolean isOnTarget = false;
     if (Math.abs(elevatorMotor.getSelectedSensorPosition() - targetPosition) < 300){
       isOnTarget = true;
-      solenoidBrake.set(true);
+      //solenoidBrake.set(true);
     }
     return isOnTarget;
   }
