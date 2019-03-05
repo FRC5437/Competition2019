@@ -48,6 +48,8 @@ public class Chassis extends Subsystem {
 
     forwardStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidForwardStilts);
     rearStilts = new Solenoid(RobotMap.pneumaticsControlModulePrimaryNodeId, RobotMap.solenoidRearStilts);
+    forwardStilts.set(false);
+    rearStilts.set(false);
     stiltDrive = new WPI_TalonSRX(RobotMap.stiltDrivePort);
 
     frontLeft = new WPI_TalonSRX(RobotMap.frontLeftMecanumPort);
@@ -80,6 +82,39 @@ public class Chassis extends Subsystem {
   // it appears the x and y are documented backwards in wpi lib?
   public void driveCartesian(double x, double y, double rotation){
     mecanumDrive.driveCartesian(x, y, rotation, 0.0);
+  }
+
+  public void raiseStilts(){
+    forwardStilts.set(true);
+    rearStilts.set(true);
+  }
+
+  public void raiseForwardStilts(){
+    forwardStilts.set(true);
+  }
+
+  public void raiseRearStilts(){
+    rearStilts.set(true);
+  }
+
+  public void driveCreeper(double speed){
+    stiltDrive.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void retractForwardStilts(){
+    forwardStilts.set(false);
+  }
+
+  public void retractRearStilts(){
+    rearStilts.set(false);
+  }
+
+  public boolean getFrontProximitySensor(){
+    return frontProximitySensor.get();
+  }
+
+  public boolean getRearProximitySensor(){
+    return rearProximitySensor.get();
   }
 
   public void driveOntoHab3(){

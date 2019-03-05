@@ -18,7 +18,6 @@ public class RobotMap {
 
   // Channels for pneumatics
   final public static int pneumaticsControlModulePrimaryNodeId = 0;
-  final public static int solenoidBrake = 0;
   final public static int solenoidShoulder = 1;
   final public static int solenoidElbow = 2;
   final public static int solenoidClaw = 3;

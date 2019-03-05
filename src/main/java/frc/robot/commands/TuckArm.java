@@ -14,7 +14,7 @@ public class TuckArm extends CommandGroup {
    * Add your docs here.
    */
   public TuckArm() {
-    addSequential(new RetractElbow());
+    addSequential(new ExtendElbow());
     addSequential(new ExtendShoulder());
   }
 }

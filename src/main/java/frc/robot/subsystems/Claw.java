@@ -42,19 +42,19 @@ public class Claw extends Subsystem {
   }
 
   public void extendElbow(){
-    elbowSolenoid.set(true);
-  }
-
-  public void retractElbow(){
     elbowSolenoid.set(false);
   }
 
+  public void retractElbow(){
+    elbowSolenoid.set(true);
+  }
+
   public void extendShoulder(){
-    shoulderSolenoid.set(true);
+    shoulderSolenoid.set(false);
   }
 
   public void retractShoulder(){
-    shoulderSolenoid.set(false);
+    shoulderSolenoid.set(true);
   }
 
   public boolean getClawState(){

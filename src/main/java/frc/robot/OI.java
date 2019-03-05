@@ -7,15 +7,22 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CloseClaw;
+import frc.robot.commands.DeployAllStilts;
+import frc.robot.commands.DeployForwardStilts;
+import frc.robot.commands.DeployRearStilts;
+import frc.robot.commands.DriveCreeper;
 import frc.robot.commands.DropArm;
 import frc.robot.commands.ExtendElbow;
 import frc.robot.commands.ExtendShoulder;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractElbow;
+import frc.robot.commands.RetractForwardStilts;
+import frc.robot.commands.RetractRearStilts;
 import frc.robot.commands.RetractShoulder;
 import frc.robot.commands.StraightenArm;
 import frc.robot.commands.ToggleClaw;
@@ -35,10 +42,10 @@ public class OI {
   // Button button = new JoystickButton(stick, buttonNumber);
 
   final static int xboxDriveControllerPort = 1;
-  final static int xboxOperatorControllerPort = 2;
+  final static int joystickOperatorControllerPort = 2;
   
   XboxController xboxDrive = new XboxController(xboxDriveControllerPort);
-  XboxController xboxOperator = new XboxController(xboxOperatorControllerPort);
+  Joystick operatorControls = new Joystick(joystickOperatorControllerPort);
 
   public JoystickButton xButton = new JoystickButton(xboxDrive, 3);
 	public JoystickButton yButton = new JoystickButton(xboxDrive, 4);
@@ -49,15 +56,25 @@ public class OI {
 	public JoystickButton startButton = new JoystickButton(xboxDrive, 8);
 	public JoystickButton selectButton = new JoystickButton(xboxDrive, 7);
 	public JoystickButton leftStickButton = new JoystickButton(xboxDrive, 9);
-	public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
+  public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
+  
+  public JoystickButton topLeftBlue = new JoystickButton(operatorControls, 1);
+  public JoystickButton topRightBlue = new JoystickButton(operatorControls, 2);
+  public JoystickButton topLeftRed = new JoystickButton(operatorControls, 3);
+  public JoystickButton topRightRed = new JoystickButton(operatorControls, 4);
 
   public OI(){
     xButton.whenPressed(new ToggleClaw());
     yButton.whenPressed(new ExtendShoulder());
-    aButton.whenPressed(new ExtendElbow());
+    aButton.whenPressed(new RetractElbow());
     bButton.whenPressed(new TuckArm());
-    rightBumper.whenPressed(new RetractShoulder());
-    leftBumper.whenPressed(new RetractElbow());
+    rightBumper.whenPressed(new ExtendElbow());
+    leftBumper.whenPressed(new RetractShoulder());
+    startButton.whileHeld(new DriveCreeper());
+    topLeftBlue.whenPressed(new DeployForwardStilts());
+    topRightBlue.whenPressed(new DeployRearStilts());
+    topLeftRed.whenPressed(new RetractForwardStilts());
+    topRightRed.whenPressed(new RetractRearStilts());
   }
 
   // There are a few additional built in buttons you can use. Additionally,

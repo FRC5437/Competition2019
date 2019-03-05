@@ -8,6 +8,6 @@ public class StraightenArm extends CommandGroup {
    */
   public StraightenArm() {
     addSequential(new RetractShoulder());
-    addSequential(new ExtendElbow());
+    addSequential(new RetractElbow());
   }
 }

@@ -15,6 +15,6 @@ public class DropArm extends CommandGroup {
    */
   public DropArm() {
     addSequential(new RetractShoulder());
-    addSequential(new RetractElbow());
+    addSequential(new ExtendElbow());
   }
 }
