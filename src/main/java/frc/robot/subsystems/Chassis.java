@@ -69,7 +69,7 @@ public class Chassis extends Subsystem {
     rearLeft.setNeutralMode(NeutralMode.Brake);
     rearRight.setNeutralMode(NeutralMode.Brake);
 
-    mecanumDrive.setExpiration(0.1);
+    mecanumDrive.setExpiration(0.2);
   }
 
   @Override
@@ -153,6 +153,5 @@ public class Chassis extends Subsystem {
     mecanumDrive.drivePolar(0.4, 0.0, 0.0);
     Timer.delay(0.5);
     mecanumDrive.drivePolar(0.0, 0.0, 0.0);
-
   }
 }

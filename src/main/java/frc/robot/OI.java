@@ -18,6 +18,7 @@ import frc.robot.commands.DriveCreeper;
 import frc.robot.commands.DropArm;
 import frc.robot.commands.ExtendElbow;
 import frc.robot.commands.ExtendShoulder;
+import frc.robot.commands.GrabHatchFromLoadingStation;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractElbow;
@@ -71,6 +72,7 @@ public class OI {
     rightBumper.whenPressed(new ExtendElbow());
     leftBumper.whenPressed(new RetractShoulder());
     startButton.whileHeld(new DriveCreeper());
+    selectButton.whileHeld(new GrabHatchFromLoadingStation());
     topLeftBlue.whenPressed(new DeployForwardStilts());
     topRightBlue.whenPressed(new DeployRearStilts());
     topLeftRed.whenPressed(new RetractForwardStilts());
