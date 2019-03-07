@@ -33,4 +33,8 @@ public class RobotMap {
   final public static int leftStickYAxis = 1;
   final public static int rightStickXAxis = 4;
 
+  // Limelight constants
+  final public static int defaultDrivingPipeline = 0;
+  final public static int defaultTargetingPipeline = 1;
+
 }

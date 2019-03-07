@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class GrabHatchFromLoadingStation extends Command {
   private boolean m_LimelightHasValidTarget;
@@ -25,6 +26,7 @@ public class GrabHatchFromLoadingStation extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.setLimelightPipeline(RobotMap.defaultTargetingPipeline);
     m_LimelightHasValidTarget = false;
     m_LimelightDriveCommand = 0.0;
     m_LimelightSteerCommand = 0.0;
@@ -46,12 +48,15 @@ public class GrabHatchFromLoadingStation extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.setLimelightPipeline(RobotMap.defaultDrivingPipeline);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.setLimelightPipeline(RobotMap.defaultDrivingPipeline);
+
   }
 
   private void updateLimelightTracking(){

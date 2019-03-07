@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,9 +26,6 @@ public class Robot extends TimedRobot {
 
   //setup pneumatics
   Compressor compressor = new Compressor(RobotMap.pneumaticsControlModulePrimaryNodeId);
-  
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -36,11 +34,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     compressor.setClosedLoopControl(true);
-
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new HabClimbFromL1ToL3());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+
+    // set the limelight for driver viewing in sandstorm
+    setLimelightPipeline(RobotMap.defaultDrivingPipeline);
   }
 
   /**
@@ -82,19 +79,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    
   }
 
   /**
@@ -111,9 +96,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+
   }
 
   /**
@@ -129,5 +112,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public static void setLimelightPipeline(int pipelineIndex){
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pipelineIndex);
   }
 }
