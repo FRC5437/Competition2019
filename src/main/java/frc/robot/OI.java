@@ -71,12 +71,12 @@ public class OI {
     bButton.whenPressed(new TuckArm());
     rightBumper.whenPressed(new ExtendElbow());
     leftBumper.whenPressed(new RetractShoulder());
-    startButton.whileHeld(new DriveCreeper());
+    //startButton.whileHeld(new DriveCreeper());
     selectButton.whileHeld(new GrabHatchFromLoadingStation());
-    topLeftBlue.whenPressed(new DeployForwardStilts());
-    topRightBlue.whenPressed(new DeployRearStilts());
-    topLeftRed.whenPressed(new RetractForwardStilts());
-    topRightRed.whenPressed(new RetractRearStilts());
+    //topLeftBlue.whenPressed(new DeployForwardStilts());
+    //topRightBlue.whenPressed(new DeployRearStilts());
+    //topLeftRed.whenPressed(new RetractForwardStilts());
+    //topRightRed.whenPressed(new RetractRearStilts());
   }
 
   // There are a few additional built in buttons you can use. Additionally,

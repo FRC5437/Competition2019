@@ -19,7 +19,7 @@ public class AdjustElevator extends Command {
   @Override
   protected void execute() {
     // Trigger axes are all positive - so treat the left as negative and sum with the right to get a full range
-    double stickInput = -1.0 * Robot.m_oi.getXboxDrive().getTriggerAxis(Hand.kLeft) + Robot.m_oi.getXboxDrive().getTriggerAxis(Hand.kRight);
+    double stickInput = Robot.m_oi.getXboxDrive().getTriggerAxis(Hand.kLeft) + (-1.0 * Robot.m_oi.getXboxDrive().getTriggerAxis(Hand.kRight));
 		if (Math.abs(stickInput) < 0.1) {
 			stickInput = 0.0;
 		}
