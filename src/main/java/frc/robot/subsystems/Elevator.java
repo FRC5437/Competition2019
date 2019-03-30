@@ -17,7 +17,7 @@ public class Elevator extends PIDSubsystem {
   WPI_TalonSRX elevatorMotor;
   WPI_TalonSRX elevatorSlaveMotor;
   final static double kP = 0.4;
-	final static double kI = 0.0;
+	final static double kI = 0.1;
   final static double kD = 0.0;
 
   int targetPosition;
@@ -48,6 +48,10 @@ public class Elevator extends PIDSubsystem {
   
   @Override
   protected void usePIDOutput(double output) {
+    //attempting to compensate for the substantial difference on up vs down
+    if (output < 0.0){
+      output = output * 0.5;
+    }
     elevatorMotor.set(ControlMode.PercentOutput, output);
   }
 
@@ -58,7 +62,9 @@ public class Elevator extends PIDSubsystem {
   }
 
   public void adjustElevator(double speed){
-    //TODO - adjust speed for up vs down differences
+    if (speed < 0.0){
+      speed = speed * 0.5;
+    }
     elevatorMotor.set(ControlMode.PercentOutput, speed);
   }
 
