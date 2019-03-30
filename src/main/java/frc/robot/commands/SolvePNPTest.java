@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class GrabHatchFromLoadingStation extends Command {
+public class SolvePNPTest extends Command {
   private boolean m_LimelightHasValidTarget;
   private double m_LimelightDriveCommand;
-  private double m_LimelightSteerCommand;
+  private double m_LimelightRotateCommand;
+  private double m_LimelightStrafeCommand;
 
-
-  public GrabHatchFromLoadingStation() {
+  public SolvePNPTest() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_chassis);
   }
@@ -30,14 +30,15 @@ public class GrabHatchFromLoadingStation extends Command {
     Robot.setLimelightPipeline(RobotMap.limelightPipelineTargetBasic);
     m_LimelightHasValidTarget = false;
     m_LimelightDriveCommand = 0.0;
-    m_LimelightSteerCommand = 0.0;
+    m_LimelightRotateCommand = 0.0;
+    m_LimelightStrafeCommand = 0.0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    updateLimelightTracking();
-    Robot.m_chassis.driveCartesian(0.0, m_LimelightDriveCommand, m_LimelightSteerCommand);
+    updateLimelight3DTracking();
+    Robot.m_chassis.driveCartesian(m_LimelightStrafeCommand, m_LimelightDriveCommand, m_LimelightRotateCommand);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -57,39 +58,44 @@ public class GrabHatchFromLoadingStation extends Command {
   @Override
   protected void interrupted() {
     Robot.setLimelightPipeline(RobotMap.limelightPipelineDefault);
-
   }
 
-  private void updateLimelightTracking(){
+  private void updateLimelight3DTracking(){
     // These numbers must be tuned for your Robot!  Be careful!
-    final double STEER_K = 0.04;                    // how hard to turn toward the target
+    final double ROTATE_K = 0.04;                    // how hard to turn toward the target
+    final double STRAFE_K = 0.04;
     final double DRIVE_K = 0.25;                    // how hard to drive fwd toward the target
-    final double DESIRED_TARGET_AREA = 4.0;        // Area of the target when the robot reaches the wall
-    final double MAX_DRIVE = 0.7;                   // Simple speed limit so we don't drive too fast
+    final double CAMERA_OFFSET = -8.00;      //camera is mounted on left edge of robot and is thus some inches off of center target
+    final double DESIRED_TARGET_DISTANCE = 48.0;        // distance in inches along z axis from target
+    final double MAX_DRIVE = 0.5;                   // Simple speed limit so we don't drive too fast
 
     NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-
+    double[] camtran = limelightTable.getEntry("camtran").getDoubleArray(new double[6]);
+    double yaw = camtran[4];
+    double xVal = camtran[0];
+    double zVal = camtran[2];
     double tv = limelightTable.getEntry("tv").getDouble(0);
-    double tx = limelightTable.getEntry("tx").getDouble(0);
-    double ty = limelightTable.getEntry("ty").getDouble(0);
     double ta = limelightTable.getEntry("ta").getDouble(0);
 
     if (tv < 1.0)
     {
       m_LimelightHasValidTarget = false;
       m_LimelightDriveCommand = 0.0;
-      m_LimelightSteerCommand = 0.0;
+      m_LimelightStrafeCommand = 0.0;
+      m_LimelightRotateCommand = 0.0;
       return;
     }
 
     m_LimelightHasValidTarget = true;
 
-    // Start with proportional steering
-    double steer_cmd = tx * STEER_K;
-    m_LimelightSteerCommand = steer_cmd;
+    double strafe_cmd = (CAMERA_OFFSET - xVal) * STRAFE_K;
+    m_LimelightStrafeCommand = strafe_cmd;
+
+    double rotate_cmd = yaw * ROTATE_K;
+    m_LimelightRotateCommand = rotate_cmd;
 
     // try to drive forward until the target area reaches our desired area
-    double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+    double drive_cmd = (DESIRED_TARGET_DISTANCE - zVal) * DRIVE_K;
 
     // don't let the robot drive too fast into the goal
     if (drive_cmd > MAX_DRIVE)
@@ -97,5 +103,6 @@ public class GrabHatchFromLoadingStation extends Command {
       drive_cmd = MAX_DRIVE;
     }
     m_LimelightDriveCommand = drive_cmd;
+
   }
 }

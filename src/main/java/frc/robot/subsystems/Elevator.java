@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.AdjustElevator;
@@ -15,7 +14,6 @@ import frc.robot.commands.AdjustElevator;
  * Add your docs here.
  */
 public class Elevator extends PIDSubsystem {
-  //Solenoid solenoidBrake;
   WPI_TalonSRX elevatorMotor;
   WPI_TalonSRX elevatorSlaveMotor;
   final static double kP = 0.4;
@@ -40,15 +38,11 @@ public class Elevator extends PIDSubsystem {
     
     elevatorSlaveMotor = new WPI_TalonSRX(RobotMap.elevatorSlavePort);
     elevatorSlaveMotor.follow(elevatorMotor);
-    //TODO any other config needed???
-
-    //solenoidBrake = new Solenoid(RobotMap.solenoidBrake);
-    //solenoidBrake.set(false);
+    setAbsoluteTolerance(500.0);
   }
 
   @Override
 	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
 		return elevatorMotor.getSelectedSensorPosition(0);
   }
   
@@ -63,32 +57,17 @@ public class Elevator extends PIDSubsystem {
     setDefaultCommand(new AdjustElevator());
   }
 
-  public void setBrake(){
-    //solenoidBrake.set(true);
-  }
-
-  public void releaseBrake(){
-    //solenoidBrake.set(false);
-  }
-
   public void adjustElevator(double speed){
     //TODO - adjust speed for up vs down differences
-    //solenoidBrake.set(false);
     elevatorMotor.set(ControlMode.PercentOutput, speed);
   }
 
   public void setElevatorToPosition(int encoderTicks){
-    targetPosition = encoderTicks;
     elevatorMotor.set(ControlMode.Position, encoderTicks);
   }
 
-  public boolean onTarget(){
-    boolean isOnTarget = false;
-    if (Math.abs(elevatorMotor.getSelectedSensorPosition() - targetPosition) < 300){
-      isOnTarget = true;
-      //solenoidBrake.set(true);
-    }
-    return isOnTarget;
+  public void resetEncoder(){
+    elevatorMotor.setSelectedSensorPosition(0);
   }
 
   public void stopElevator(){
@@ -97,6 +76,8 @@ public class Elevator extends PIDSubsystem {
 
   //TODO - add specific height targets for elevator positioning
   // such as rocket hatch low/mid/high and rocket cargo low/med/high
-
+  public int getEncoderPosition(){
+    return elevatorMotor.getSelectedSensorPosition();
+  }
 
 }

@@ -13,14 +13,14 @@ import frc.robot.Robot;
 public class HabClimbFromL1ToL3 extends Command {
   public HabClimbFromL1ToL3() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_chassis);
+    requires(Robot.m_climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     //Robot.m_chassis.driveOntoHab3();
-    Robot.m_chassis.raiseStilts();
+    Robot.m_climber.raiseStilts();
   }
 
   // Called repeatedly when this Command is scheduled to run

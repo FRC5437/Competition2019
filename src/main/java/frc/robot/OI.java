@@ -21,10 +21,12 @@ import frc.robot.commands.ExtendShoulder;
 import frc.robot.commands.GrabHatchFromLoadingStation;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.RaiseArm;
+import frc.robot.commands.ResetElevatorEncoder;
 import frc.robot.commands.RetractElbow;
 import frc.robot.commands.RetractForwardStilts;
 import frc.robot.commands.RetractRearStilts;
 import frc.robot.commands.RetractShoulder;
+import frc.robot.commands.SetElevatorToTarget;
 import frc.robot.commands.StraightenArm;
 import frc.robot.commands.ToggleClaw;
 import frc.robot.commands.TuckArm;
@@ -59,10 +61,15 @@ public class OI {
 	public JoystickButton leftStickButton = new JoystickButton(xboxDrive, 9);
   public JoystickButton rightStickButton = new JoystickButton(xboxDrive, 10);
   
-  public JoystickButton topLeftBlue = new JoystickButton(operatorControls, 1);
-  public JoystickButton topRightBlue = new JoystickButton(operatorControls, 2);
-  public JoystickButton topLeftRed = new JoystickButton(operatorControls, 3);
-  public JoystickButton topRightRed = new JoystickButton(operatorControls, 4);
+  public JoystickButton buttonLeft1 = new JoystickButton(operatorControls, 1);
+  public JoystickButton buttonRight1 = new JoystickButton(operatorControls, 2);
+  public JoystickButton buttonLeft2 = new JoystickButton(operatorControls, 3);
+  public JoystickButton buttonRight2 = new JoystickButton(operatorControls, 4);
+  public JoystickButton buttonLeft3 = new JoystickButton(operatorControls, 5);
+  public JoystickButton buttonRight3 = new JoystickButton(operatorControls, 6);
+  public JoystickButton buttonLeft4 = new JoystickButton(operatorControls, 7);
+  public JoystickButton buttonRight4 = new JoystickButton(operatorControls, 8);
+  public JoystickButton buttonResetEncoder = new JoystickButton(operatorControls, 9);
 
   public OI(){
     xButton.whenPressed(new ToggleClaw());
@@ -71,12 +78,28 @@ public class OI {
     bButton.whenPressed(new TuckArm());
     rightBumper.whenPressed(new ExtendElbow());
     leftBumper.whenPressed(new RetractShoulder());
-    //startButton.whileHeld(new DriveCreeper());
+    startButton.whileHeld(new SetElevatorToTarget(RobotMap.lowRocketCargo));
     selectButton.whileHeld(new GrabHatchFromLoadingStation());
-    //topLeftBlue.whenPressed(new DeployForwardStilts());
-    //topRightBlue.whenPressed(new DeployRearStilts());
-    //topLeftRed.whenPressed(new RetractForwardStilts());
-    //topRightRed.whenPressed(new RetractRearStilts());
+
+    //TODO - Map Buttons
+    //buttonLeft1 place hatch low
+    //buttonLeft2 place hatch mid
+    //buttonLeft3 place hatch high
+    //buttonRight1 place cargo low
+    //buttonRight2 place cargo mid
+    //buttonRight3 place cargo high
+
+    //buttonLeft4 climb
+    //buttonRight4 grab hatch
+
+    //buttonResetEncoder reset the elevator encoder
+    buttonLeft1.whenPressed(new ResetElevatorEncoder());
+    buttonRight1.whileHeld(new DeployForwardStilts());
+    buttonRight2.whileHeld(new DeployRearStilts());
+    buttonRight3.whileHeld(new DriveCreeper());
+    buttonRight4.whileHeld(new RetractForwardStilts());
+    buttonLeft4.whileHeld(new RetractRearStilts());
+
   }
 
   // There are a few additional built in buttons you can use. Additionally,

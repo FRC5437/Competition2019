@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,6 +20,7 @@ import frc.robot.commands.*;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static Climber m_climber = new Climber();
   public static Chassis m_chassis = new Chassis();
   public static Elevator m_elevator = new Elevator();
   public static Claw m_claw = new Claw();
@@ -37,7 +39,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
 
     // set the limelight for driver viewing in sandstorm
-    setLimelightPipeline(RobotMap.defaultDrivingPipeline);
+    setLimelightPipeline(RobotMap.limelightPipelineDefault);
   }
 
   /**
@@ -50,12 +52,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    updateMetrics();
   }
 
   /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
+   * This function is called once each time the robot enters Disabled mode. You
+   * can use it to reset any subsystem information you want to clear when the
+   * robot is disabled.
    */
   @Override
   public void disabledInit() {
@@ -116,5 +119,15 @@ public class Robot extends TimedRobot {
 
   public static void setLimelightPipeline(int pipelineIndex){
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pipelineIndex);
+  }
+
+  private void updateMetrics() {
+	  NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    double[] camtran = limelightTable.getEntry("camtran").getDoubleArray(new double[6]);
+    NetworkTableInstance.getDefault().getTable("RBB").getEntry("Yaw").setNumber(camtran[4]);
+    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dx").setNumber(camtran[0]);
+    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dy").setNumber(camtran[1]);
+    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dz").setNumber(camtran[2]);
+    NetworkTableInstance.getDefault().getTable("RBB").getEntry("Elevator Position").setNumber(m_elevator.getEncoderPosition());
   }
 }
