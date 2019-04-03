@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -122,12 +123,14 @@ public class Robot extends TimedRobot {
   }
 
   private void updateMetrics() {
-	  NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-    double[] camtran = limelightTable.getEntry("camtran").getDoubleArray(new double[6]);
-    NetworkTableInstance.getDefault().getTable("RBB").getEntry("Yaw").setNumber(camtran[4]);
-    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dx").setNumber(camtran[0]);
-    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dy").setNumber(camtran[1]);
-    NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dz").setNumber(camtran[2]);
-    NetworkTableInstance.getDefault().getTable("RBB").getEntry("Elevator Position").setNumber(m_elevator.getEncoderPosition());
+	  //NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+    //double[] camtran = limelightTable.getEntry("camtran").getDoubleArray(new double[6]);
+    //NetworkTableInstance.getDefault().getTable("RBB").getEntry("Yaw").setNumber(camtran[4]);
+    //NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dx").setNumber(camtran[0]);
+    //NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dy").setNumber(camtran[1]);
+    //NetworkTableInstance.getDefault().getTable("RBB").getEntry("3Dz").setNumber(camtran[2]);
+    NetworkTable rbb = NetworkTableInstance.getDefault().getTable("RBB");
+    rbb.getEntry("Elevator Position").setNumber(m_elevator.getEncoderPosition());
+    rbb.getEntry("Match Time").setNumber(Timer.getMatchTime());
   }
 }

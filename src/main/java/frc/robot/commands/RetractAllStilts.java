@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DeployAllStilts extends Command {
-  public DeployAllStilts() {
+public class RetractAllStilts extends Command {
+  public RetractAllStilts() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_climber);
   }
@@ -24,7 +24,7 @@ public class DeployAllStilts extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_climber.raiseStilts();
+    Robot.m_climber.lowerStilts();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +37,7 @@ public class DeployAllStilts extends Command {
   @Override
   protected void end() {
     Robot.m_climber.stopAllClimbers();
+
   }
 
   // Called when another command which requires one or more of the same

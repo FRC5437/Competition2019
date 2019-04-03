@@ -67,20 +67,28 @@ public class Climber extends Subsystem {
   }
 
   public void raiseStilts(){
-    // forwardStilts.set(true);
-   //  rearStilts.set(true);
+    rearMotor.set(ControlMode.PercentOutput, -0.80);
+    frontRightMotor.set(ControlMode.PercentOutput, -1.00);
+    frontLeftMotor.set(ControlMode.PercentOutput, 1.00);
+
+   }
+
+   public void lowerStilts(){
+    rearMotor.set(ControlMode.PercentOutput, 0.80);
+    frontRightMotor.set(ControlMode.PercentOutput, 1.00);
+    frontLeftMotor.set(ControlMode.PercentOutput, -1.00);
    }
  
   public void raiseFrontRight(){
-    frontRightMotor.set(ControlMode.PercentOutput, 0.50);
+    frontRightMotor.set(ControlMode.PercentOutput, 0.99);
   }
 
   public void raiseFrontLeft(){
-    frontLeftMotor.set(ControlMode.PercentOutput, 0.50);
+    frontLeftMotor.set(ControlMode.PercentOutput, 0.99);
   }
  
    public void raiseRear(){
-    rearMotor.set(ControlMode.PercentOutput, 0.50);
+    rearMotor.set(ControlMode.PercentOutput, 0.99);
    }
  
    public void drive(double speed){
@@ -88,15 +96,15 @@ public class Climber extends Subsystem {
    }
  
    public void lowerFrontRight(){
-    frontRightMotor.set(ControlMode.PercentOutput, -0.50);
+    frontRightMotor.set(ControlMode.PercentOutput, -0.99);
   }
 
   public void lowerFrontLeft(){
-    frontLeftMotor.set(ControlMode.PercentOutput, -0.50);
+    frontLeftMotor.set(ControlMode.PercentOutput, -0.99);
   }
  
    public void lowerRear(){
-    rearMotor.set(ControlMode.PercentOutput, -0.50);
+    rearMotor.set(ControlMode.PercentOutput, -0.99);
    }
  
    public boolean getFrontProximitySensor(){
@@ -150,9 +158,9 @@ public class Climber extends Subsystem {
    private void limitTalon(WPI_TalonSRX talon){
     talon.configPeakCurrentLimit(0);
     talon.configPeakCurrentDuration(0);
-    talon.configContinuousCurrentLimit(40);
+    talon.configContinuousCurrentLimit(80);
     talon.enableCurrentLimit(true);
-    talon.configOpenloopRamp(0.6);
+    talon.configOpenloopRamp(0.5);
     talon.setNeutralMode(NeutralMode.Brake);
   }
 }
