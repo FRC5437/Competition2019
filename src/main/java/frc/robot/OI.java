@@ -11,12 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CloseClaw;
-import frc.robot.commands.DeployAllStilts;
 import frc.robot.commands.DeployForwardStilts;
-import frc.robot.commands.DeployFrontLeftClimber;
-import frc.robot.commands.DeployFrontRightClimber;
 import frc.robot.commands.DeployRearStilts;
-import frc.robot.commands.DriveCreeper;
 import frc.robot.commands.DropArm;
 import frc.robot.commands.ExtendElbow;
 import frc.robot.commands.ExtendShoulder;
@@ -24,11 +20,8 @@ import frc.robot.commands.GrabHatchFromLoadingStation;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.ResetElevatorEncoder;
-import frc.robot.commands.RetractAllStilts;
 import frc.robot.commands.RetractElbow;
 import frc.robot.commands.RetractForwardStilts;
-import frc.robot.commands.RetractFrontLeftClimber;
-import frc.robot.commands.RetractFrontRightClimber;
 import frc.robot.commands.RetractRearStilts;
 import frc.robot.commands.RetractShoulder;
 import frc.robot.commands.SetElevatorToTarget;
@@ -86,25 +79,11 @@ public class OI {
     startButton.whileHeld(new SetElevatorToTarget(RobotMap.lowRocketCargo));
     selectButton.whileHeld(new GrabHatchFromLoadingStation());
 
-    //TODO - Map Buttons
-    //buttonLeft1 place hatch low
-    //buttonLeft2 place hatch mid
-    //buttonLeft3 place hatch high
-    //buttonRight1 place cargo low
-    //buttonRight2 place cargo mid
-    //buttonRight3 place cargo high
 
-    //buttonLeft4 climb
-    //buttonRight4 grab hatch
-
-    //buttonResetEncoder reset the elevator encoder
-    buttonLeft1.whileHeld(new DeployAllStilts());
-    buttonRight1.whileHeld(new RetractAllStilts());
-    buttonRight2.whileHeld(new DeployFrontRightClimber());
-    buttonRight3.whileHeld(new DeployRearStilts());
-    buttonRight4.whileHeld(new RetractFrontRightClimber());
-    buttonLeft4.whileHeld(new RetractRearStilts());
-    buttonLeft3.whileHeld(new RetractFrontLeftClimber());
+    buttonLeft1.whenPressed(new DeployForwardStilts());
+    buttonRight1.whenPressed(new DeployRearStilts());
+    buttonLeft2.whenPressed(new RetractForwardStilts());
+    buttonRight2.whenPressed(new RetractRearStilts());
 
   }
 

@@ -20,8 +20,8 @@ public class RobotMap {
   final public static int solenoidShoulder = 1;
   final public static int solenoidElbow = 2;
   final public static int solenoidClaw = 3;
-  final public static int solenoidForwardStilts = 4;
-  final public static int solenoidRearStilts = 5;
+  final public static int solenoidRearStilts = 4;
+  final public static int solenoidFrontStilts = 5;
 
   // Digital IO for sensors
   final public static int frontProximitySensor = 0;
