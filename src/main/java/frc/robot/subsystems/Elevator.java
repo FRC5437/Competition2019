@@ -63,8 +63,15 @@ public class Elevator extends PIDSubsystem {
 
   public void adjustElevator(double speed){
     if (speed < 0.0){
-      speed = speed * 0.5;
+      if (elevatorMotor.getSelectedSensorPosition(0) < 100){
+        speed = 0.0;
+      } else if (elevatorMotor.getSelectedSensorPosition(0) < 2000){
+        speed = speed * 0.2;
+      } else{
+        speed = speed * 0.5;
+      }
     }
+      
     elevatorMotor.set(ControlMode.PercentOutput, speed);
   }
 
