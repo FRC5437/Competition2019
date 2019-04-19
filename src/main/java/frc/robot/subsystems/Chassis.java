@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -23,7 +22,6 @@ import frc.robot.commands.DriveRobot;
 public class Chassis extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  AHRS ahrs;
   MecanumDrive mecanumDrive;
   WPI_TalonSRX frontLeft;
   WPI_TalonSRX rearLeft;
@@ -55,8 +53,6 @@ public class Chassis extends Subsystem {
     setDefaultCommand(new DriveRobot());
   }
 
-  // TODO determine if we are going to need gyroAngle in any scenario
-  // it appears the x and y are documented backwards in wpi lib?
   public void driveCartesian(double x, double y, double rotation){
     mecanumDrive.driveCartesian(x, y, rotation, 0.0);
   }

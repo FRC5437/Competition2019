@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class DeployForwardStilts extends Command {
   public DeployForwardStilts() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_climber);
+    //requires(Robot.m_climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_climber.raiseFront();
+    //Robot.m_climber.raiseFront();
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class RetractForwardStilts extends Command {
   public RetractForwardStilts() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_climber);
+   // requires(Robot.m_climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_climber.lowerFront();
+    //Robot.m_climber.lowerFront();
   }
 
   // Called repeatedly when this Command is scheduled to run
